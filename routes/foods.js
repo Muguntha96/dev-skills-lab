@@ -7,7 +7,7 @@ router.get('/', foodsCtrl.index)
 router.get('/new',foodsCtrl.new)
 router.get('/:foodId',foodsCtrl.show)
 router.get('/:foodId/edit',foodsCtrl.edit)
-router.post('/',foodsCtrl.create)
+ router.post('/',foodsCtrl.create)
 router.delete('/:foodId',foodsCtrl.delete)
 
 

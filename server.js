@@ -5,7 +5,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import createError from 'http-errors'
 import logger from 'morgan'
-// import methodOverride from 'method-override'
+import methodOverride from 'method-override'
 import './config/database.js'
 
 // import routers
@@ -19,6 +19,10 @@ const app = express()
 app.set('view engine', 'ejs')
 
 // basic middleware
+app.use(function(req, res, next) {
+  req.time = new Date().toLocaleTimeString()
+  next()
+})
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -27,7 +31,7 @@ app.use(
     path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
   )
 )
-
+app.use(methodOverride('_method')) 
 // mount imported routes
 app.use('/', indexRouter)
 app.use('/foods', foodsRouter)

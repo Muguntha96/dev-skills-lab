@@ -5,16 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <title>Express To-Do</title>
+  <title>Foods-List</title>
 </head>
 
 <body>
-  <h1>Foods-List</h1>
+  <h1>Foods-List as of <%= time %></h1>
   <ul>
-    <% foods.forEach(food=> { %>
+    <% foods.forEach(food => { %>
       <li>
         <form 
-        action="/foods/<%= food._id %>?_method=DELETE"
+        action="/foods/<%= food._id%>?_method=DELETE"
         class="delete-form"
         method="POST"
       >
@@ -28,7 +28,7 @@
       </li>
       <% }) %>
   </ul>
-  <a href="/foods/new">Add Food</a>
+  <a href="/foods/new">Add New Food</a>
 </body>
 
 </html>

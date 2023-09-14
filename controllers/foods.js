@@ -4,7 +4,8 @@ function index(req, res) {
   Food.find({})
     .then(foods => {
       res.render('foods/index', {
-        foods: foods
+        foods: foods,
+        time: req.time
       })
     })
     .catch(error => {
@@ -16,9 +17,10 @@ function newFood(req,res){
 res.render('foods/new')
 }
 
-function create(req,res){
+function create(req, res) {
+  req.body.spicy = false
   Food.create(req.body)
-  .then(food =>{
+  .then(food => {
     res.redirect('/foods')
   })
   .catch(error => {
@@ -38,6 +40,18 @@ function show(req,res){
     res.redirect('/foods')
   })
 }
+function deleteFood(req,res){
+  Food.findByIdAndDelete(req.params.foodId)
+  .then(food =>{
+    res.redirect('/foods')
+
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/foods')
+  })
+}
+
 function edit(req,res){
   Food.findById(req.params.foodId)
   .then(food => {
@@ -57,5 +71,7 @@ export {
   newFood as new,
   create,
   show,
-  edit
+  deleteFood as delete,
+  edit,
+
 }
