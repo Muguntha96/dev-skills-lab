@@ -13,58 +13,71 @@ function index(req, res) {
       res.redirect('/')
     })
 }
-function newFood(req,res){
-res.render('foods/new')
+function newFood(req, res) {
+  res.render('foods/new')
 }
 
 function create(req, res) {
   req.body.spicy = false
   Food.create(req.body)
-  .then(food => {
-    res.redirect('/foods')
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/foods')
-  })
-}
-function show(req,res){
-  Food.findById(req.params.foodId)
-  .then(food =>{
-    res.render('foods/show',{
-      food:food
+    .then(food => {
+      res.redirect('/foods')
     })
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/foods')
-  })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/foods')
+    })
 }
-function deleteFood(req,res){
+
+function show(req, res) {
+  Food.findById(req.params.foodId)
+    .then(food => {
+      res.render('foods/show', {
+        food: food
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/foods')
+    })
+}
+
+function deleteFood(req, res) {
   Food.findByIdAndDelete(req.params.foodId)
-  .then(food =>{
-    res.redirect('/foods')
+    .then(food => {
+      res.redirect('/foods')
 
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/foods')
-  })
-}
-
-function edit(req,res){
-  Food.findById(req.params.foodId)
-  .then(food => {
-    res.render('foods/edit',{
-      food:food
     })
-  })
-  .catch(error => {
-    console.log(error)
-    res.redirect('/foods')
-  })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/foods')
+    })
 }
 
+function edit(req, res) {
+  Food.findById(req.params.foodId)
+    .then(food => {
+      res.render('foods/edit', {
+        food: food
+      })
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/foods')
+    })
+}
+
+function foodUpdate(req, res) {
+  req.body.spicy = !!req.body.spicy
+  Food.findByIdAndUpdate(req.params.foodId, req.body, { new: true })
+    .then(food => {
+      res.redirect(`/foods/${food._id}`)
+    })
+    .catch(error => {
+      console.log(error)
+      res.redirect('/foods')
+    })
+}
 
 export {
   index,
@@ -73,5 +86,5 @@ export {
   show,
   deleteFood as delete,
   edit,
-
+  foodUpdate as update
 }

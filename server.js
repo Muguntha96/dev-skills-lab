@@ -19,7 +19,7 @@ const app = express()
 app.set('view engine', 'ejs')
 
 // basic middleware
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   req.time = new Date().toLocaleTimeString()
   next()
 })
@@ -31,7 +31,7 @@ app.use(
     path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
   )
 )
-app.use(methodOverride('_method')) 
+app.use(methodOverride('_method'))
 // mount imported routes
 app.use('/', indexRouter)
 app.use('/foods', foodsRouter)

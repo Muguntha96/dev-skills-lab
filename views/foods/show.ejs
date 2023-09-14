@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,19 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <title>Document</title>
 </head>
+
 <body>
   <h1>Foods</h1>
-  <h2>Food #<%= food._id %></h2>
+  <h2>Food #<%= food._id %>
+  </h2>
   <a href="/foods/<%= food._id %>/edit">Edit</a>
-  <h3><%= food.name %></h3>
-  <p>Spicy: <%= food.spicy ? 'Yes' : 'No' %></p>
+  <h3>Food Name: <%= food.name %>
+  </h3>
+  <p>Cuisine: <%= food.cuisine %>
+  </p>
+  <p>Spicy: <%= food.spicy ? 'Yes' : 'No' %>
+  </p>
   <a href="/foods">Go back</a>
 </body>
+
 </html>

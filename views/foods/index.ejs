@@ -9,21 +9,20 @@
 </head>
 
 <body>
-  <h1>Foods-List as of <%= time %></h1>
+  <h1>Foods-List as of <%= time %>
+  </h1>
   <ul>
-    <% foods.forEach(food => { %>
+    <% foods.forEach(food=> { %>
       <li>
-        <form 
-        action="/foods/<%= food._id%>?_method=DELETE"
-        class="delete-form"
-        method="POST"
-      >
-        <button type="submit">X</button>
-      </form>
-        <a href="foods/<%= food._id %>"><%= food.name %></a>
-          -
-          <%= food.cuisine%>
-          -
+        <form action="/foods/<%= food._id%>?_method=DELETE" class="delete-form" method="POST">
+          <button type="submit">X</button>
+        </form>
+        <a href="foods/<%= food._id %>">
+          <%= food.name %>
+        </a>
+        -
+        <%= food.cuisine%>
+        -
           <%= food.spicy ? 'spicy' : 'not spicy' %>
       </li>
       <% }) %>

@@ -6,7 +6,7 @@ const foodSchema = new Schema({
   name: String,
   cuisine: String,
   spicy: Boolean
-  
+
 })
 
 const Food = mongoose.model('Food', foodSchema)
