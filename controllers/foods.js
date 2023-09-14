@@ -10,10 +10,52 @@ function index(req, res) {
     .catch(error => {
       console.log(error)
       res.redirect('/')
-
     })
 }
+function newFood(req,res){
+res.render('foods/new')
+}
+
+function create(req,res){
+  Food.create(req.body)
+  .then(food =>{
+    res.redirect('/foods')
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/foods')
+  })
+}
+function show(req,res){
+  Food.findById(req.params.foodId)
+  .then(food =>{
+    res.render('foods/show',{
+      food:food
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/foods')
+  })
+}
+function edit(req,res){
+  Food.findById(req.params.foodId)
+  .then(food => {
+    res.render('foods/edit',{
+      food:food
+    })
+  })
+  .catch(error => {
+    console.log(error)
+    res.redirect('/foods')
+  })
+}
+
 
 export {
-  index
+  index,
+  newFood as new,
+  create,
+  show,
+  edit
 }
